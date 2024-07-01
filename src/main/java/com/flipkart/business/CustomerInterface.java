@@ -20,7 +20,7 @@ public interface CustomerInterface {
 
 	boolean validateUser(String username, String pass);
 
-	void createUser(User user);
+	boolean createUser(User user);
 
 	boolean verifyGymUserPassword(String email, String password, String updatedPassword);
 

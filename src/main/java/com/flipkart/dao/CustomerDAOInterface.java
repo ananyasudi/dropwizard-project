@@ -14,5 +14,5 @@ public interface CustomerDAOInterface {
     List<Bookings> getAllBookingByUserID(String userId);
     boolean cancelBooking(int bookingId);
     boolean validateUser(String username, String pass);
-    void createUser(User user);
+    boolean createUser(User user);
 }

@@ -56,8 +56,8 @@ public class CustomerService implements CustomerInterface {
 	}
 
 	@Override
-	public void createUser(User user) {
-		customerDAOInterface.createUser(user);
+	public boolean createUser(User user) {
+		return customerDAOInterface.createUser(user);
 	}
 
 	@Override
