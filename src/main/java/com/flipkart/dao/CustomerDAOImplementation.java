@@ -373,12 +373,13 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
     }
 
     @Override
-    public void createUser(User user) {
+    public boolean createUser(User user) {
         conn = JDBCConnection.getConnection();
         Statement statement = null;
         ResultSet resultSet = null;
         PreparedStatement preparedStatement = null;
         String insertQuery = "INSERT INTO User (userName,email, password, phoneNumber, Address, location) VALUES(?,?,?,?,?,?)";
+        boolean flag=false;
 
         try {
             statement = conn.createStatement();
@@ -398,15 +399,23 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 
             if (rowsInserted > 0) {
                 System.out.println("Record inserted successfully!");
+                return true;
             } else {
+
                 throw new RegistrationFailedException();
             }
 
         }catch(RegistrationFailedException ex){
+
             System.out.println("User "+ ex.getMessage());
+            return false;
         } catch (SQLException e) {
+
             System.out.println(e.getMessage());
+
         }
+
+        return false;
     }
 
     public List<Slots> getGymSlotsWithGymId(int id){

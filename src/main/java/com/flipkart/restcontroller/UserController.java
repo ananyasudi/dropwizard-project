@@ -1,8 +1,5 @@
 package com.flipkart.restcontroller;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -33,5 +30,16 @@ public class UserController {
                         "3. Gymowner -> /gymowner/login&username=\"\"&password=\"\"")
                 .build();
     }
+
+    @GET
+    @Path("/register")
+    public Response register() {
+        return Response.ok("To Register as - ! \n" +
+                        "1. Admin -> /admin/register" +
+                        "2. Customer -> /customer/register" +
+                        "3. Gymowner -> /gymowner/register")
+                .build();
+    }
+
 
 }
