@@ -11,9 +11,15 @@ public interface GymOwnerInterface {
 
 	List<Gym> viewMyGyms(String userId);
 
+	List<Gym> viewAllGyms(String userId);
+
+	boolean deleteGymById(int gymId);
+
 	boolean verifyGymOwnerPassword(String email, String password);
 
 	boolean validateLogin(String email, String password);
+
+	boolean validateGymOwner(String email, String pass);
 
 	void createGymOwner(GymOwner gymOwner);
 

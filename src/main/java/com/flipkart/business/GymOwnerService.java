@@ -26,9 +26,23 @@ public class GymOwnerService implements GymOwnerInterface {
 		return gymOwnerDaoInterface.viewGymSlots(userId);
 	}
 
+	public List<Gym> viewAllGyms(String userId) {
+		System.out.println("Here in viewAllGyms in GymOwnerService\nowner id -> " + userId);
+		return gymOwnerDaoInterface.viewAllGyms(userId);
+	}
+
+	public boolean deleteGymById(int gymId){
+		return gymOwnerDaoInterface.deleteGymByID(gymId);
+	}
+
 	@Override
 	public boolean validateLogin(String email, String password) {
 		return gymOwnerDaoInterface.verifyGymOwnerPassword(email, password);
+	}
+
+	@Override
+	public boolean validateGymOwner(String email, String pass){
+		return gymOwnerDaoInterface.validateGymOwner(email, pass);
 	}
 
 	@Override

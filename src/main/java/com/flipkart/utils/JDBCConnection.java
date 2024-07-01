@@ -29,7 +29,7 @@ public class JDBCConnection {
                     String driver = "com.mysql.cj.jdbc.Driver";
                     String url = "jdbc:mysql://127.0.0.1:3306/flipfit_Schema_G";
                     String user = "root";
-                    String password = "Ananya12345!" ;
+                    String password = "" ;
                     Class.forName(driver);
                     connection = DriverManager.getConnection(url, user, password);
                     System.out.println("Connected to database");

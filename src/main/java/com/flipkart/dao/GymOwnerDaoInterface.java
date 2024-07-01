@@ -11,8 +11,11 @@ public interface GymOwnerDaoInterface {
     public boolean verifyGymOwnerPassword(String email, String password);
     void insertSlots(List<Slots> slots, int gymId);
     public List<Gym> viewGymSlots(String gymOwnerID);
+    public List<Gym> viewAllGyms(String gymOwnerID);
+    public boolean deleteGymByID(int gymId);
     void addGym(Gym gym);
     void newGymOwner(GymOwner gymOwner);
     boolean validateLogin(String email, String password);
+    boolean validateGymOwner(String email, String pass);
 
 }

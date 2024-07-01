@@ -15,6 +15,7 @@ com/flipkart/dao/AdminDAOImplementation.class
 com/flipkart/utils/JDBCConnection.class
 com/flipkart/business/GymOwnerInterface.class
 com/flipkart/bean/Admin.class
+com/flipkart/restcontroller/GymOwnerController.class
 com/flipkart/bean/Slots.class
 com/flipkart/dao/CustomerDAOInterface.class
 com/flipkart/constants/SQLConstants.class

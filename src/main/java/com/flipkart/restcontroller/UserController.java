@@ -28,9 +28,9 @@ public class UserController {
     public Response login() {
 
         return Response.ok("To Login as - ! \n" +
-                        "1. Admin -> /admin/login&username=\"\"&password=\"\"\n" +
-                        "2. Customer -> /customer/login&username=\"\"&password=\"\"\n" +
-                        "3. Gymowner -> /gymowner/login&username=\"\"&password=\"\"")
+                        "1. Admin -> /admin/login?username=\"\"&password=\"\"\n" +
+                        "2. Customer -> /customer/login?username=\"\"&password=\"\"\n" +
+                        "3. GymOwner -> /gymOwner/login?email=\"\"&password=\"\"")
                 .build();
     }
 

@@ -240,6 +240,8 @@ public class GymOwnerDAOImplementation implements GymOwnerDaoInterface {
         ResultSet resultSet = null;
         List<Gym> gyms = new ArrayList<>();
 
+        System.out.println("gymowner id in viewGymSlots in dao impl ->" + gymOwnerID);
+
         try {
             String sqlQuery = "SELECT * FROM gyms WHERE ownerId=?";
             preparedStatement = conn.prepareStatement(sqlQuery);
@@ -258,10 +260,16 @@ public class GymOwnerDAOImplementation implements GymOwnerDaoInterface {
                 gym.setOwnerId(gymOwnerID);
                 gym.setLocation(location);
                 gym.setStatus(status);
-                gyms.add(gym);
+                gym.setGymId(id);
+
+                System.out.println("Gym created without slots");
 
                 List<Slots> slots = getGymSlotsWithGymId(id);
                 gym.setSlots(slots);
+
+                gyms.add(gym);
+
+                System.out.println("Gym created with slots");
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -270,7 +278,72 @@ public class GymOwnerDAOImplementation implements GymOwnerDaoInterface {
         return gyms;
     }
 
+    public List<Gym> viewAllGyms(String gymOwnerID){
+        System.out.println("Here in viewAllGyms in GymOwnerDAOImplementation\nownerId is -> " + gymOwnerID);
+        conn = JDBCConnection.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Gym> gyms = new ArrayList<>();
+
+        try {
+            String sqlQuery = "SELECT * FROM gyms WHERE ownerId=?";
+            preparedStatement = conn.prepareStatement(sqlQuery);
+            preparedStatement.setString(1, gymOwnerID);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("gymId");
+                String gymAddress = resultSet.getString("gymAddress");
+                String location = resultSet.getString("location");
+                String gymName = resultSet.getString("gymName");
+                String status = resultSet.getString("status");
+                Gym gym = new Gym();
+                gym.setGymId(id);
+                gym.setGymName(gymName);
+                gym.setGymAddress(gymAddress);
+                gym.setOwnerId(gymOwnerID);
+                gym.setLocation(location);
+                gym.setStatus(status);
+                gyms.add(gym);
+
+//                List<Slots> slots = getGymSlotsWithGymId(id);
+//                gym.setSlots(slots);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return gyms;
+    }
+
+    public boolean deleteGymByID(int gymId){
+        conn = JDBCConnection.getConnection();
+        Statement statement = null;
+        ResultSet resultSet = null;
+//        List<Slots> slotList = new ArrayList<>();
+        try {
+            String sqlQuery = "DELETE FROM gyms WHERE gymId= " + gymId;
+            statement = conn.createStatement();
+//            resultSet = statement.executeQuery(sqlQuery);
+
+            int rowsAffected = statement.executeUpdate(sqlQuery);
+            if (rowsAffected > 0) {
+                return true;
+            }
+
+//            if (resultSet.next()) {
+//                return true;
+//            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
     public List<Slots> getGymSlotsWithGymId(int id){
+
+        System.out.println("gym id in -> getGymSlotsWithGymId in dao impl" + id);
+
         conn = JDBCConnection.getConnection();
         Statement statement = null;
         ResultSet resultSet = null;
@@ -291,5 +364,24 @@ public class GymOwnerDAOImplementation implements GymOwnerDaoInterface {
             System.out.println(e.getMessage());
         }
         return slotList;
+    }
+
+    @Override
+    public boolean validateGymOwner(String email, String pass) {
+        conn = JDBCConnection.getConnection();
+        Statement statement = null;
+        ResultSet resultSet = null;
+        String password2 = "-";
+        try {
+            String sqlQuery = "SELECT * FROM gym_owner WHERE email= \""  + email + "\"";
+            statement = conn.createStatement();
+            resultSet = statement.executeQuery(sqlQuery);
+            while (resultSet.next()) {
+                password2 = resultSet.getString("password");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return password2.equals(pass);
     }
 }

@@ -13,7 +13,7 @@ public class SQLConstants {
 
     public static final String GYM_USER_VERIFY_PASSWORD = "SELECT * FROM gym_owner WHERE email = ? AND Password = ?";
 
-    public static final String GYM_OWNER_VERIFY_PASSWORD = "SELECT * FROM gym_owner WHERE email = ? AND Password = ?";
+    public static final String GYM_OWNER_VERIFY_PASSWORD = "SELECT * FROM gym_owner WHERE email = ? AND password = ?";
 
     public static final String ADMIN_VIEW_ALL_USERS = "SELECT * FROM User";
 
